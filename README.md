@@ -80,8 +80,8 @@ Options:
   -l --layer                          flag only outputs the layer.json metadata file
   -C --cesium-friendly                flag forces the creation of missing root tiles to be CesiumJS-friendly
   -N --vertex-normals                 flag writes 'Oct-Encoded Per-Vertex Normals' for Terrain Lighting, only for `Mesh` format
-  -q --quiet          				  flag outputs only errors
-  -v --verbose          			  flag outputs more noisy
+  -q --quiet                          flag outputs only errors
+  -v --verbose                        flag outputs more noisy
 ```
 
 #### Recommendations
