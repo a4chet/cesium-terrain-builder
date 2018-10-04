@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 2.6)
 project("Cesium Terrain Builder")
 
+#Set ZLIB_ROOT
+set(ZLIB_LIBRARY $ENV{ZLIB_LIBRARY})
+set(ZLIB_INCLUDE_DIR $ENV{ZLIB_INCLUDE_DIR})
+
 # The version number
 set(CTB_VERSION_MAJOR 0)
 set(CTB_VERSION_MINOR 4)

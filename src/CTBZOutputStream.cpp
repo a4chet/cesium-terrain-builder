@@ -29,7 +29,7 @@ using namespace ctb;
  * Writes a sequence of memory pointed by ptr into the GZFILE*.
  */
 uint32_t
-ctb::CTBZOutputStream::write(const void *ptr, uint32_t size) {
+ctb::CTBZFileOutputStream::write(const void *ptr, uint32_t size) {
   if (size == 1) {
     int c = *((const char *)ptr);
     return gzputc(fp, c) == -1 ? 0 : 1;
@@ -39,7 +39,7 @@ ctb::CTBZOutputStream::write(const void *ptr, uint32_t size) {
   }
 }
 
-ctb::CTBZFileOutputStream::CTBZFileOutputStream(const char *fileName) : CTBZOutputStream(NULL) {
+ctb::CTBZFileOutputStream::CTBZFileOutputStream(const char *fileName) {
   gzFile file = gzopen(fileName, "wb");
 
   if (file == NULL) {
@@ -69,4 +69,24 @@ ctb::CTBZFileOutputStream::close() {
     }
     fp = NULL;
   }
+}
+
+ctb::CTBZOutputStream::CTBZOutputStream() :
+  gzipBuffer(&outputBuffer) {
+}
+
+uint32_t ctb::CTBZOutputStream::write(const void * ptr, uint32_t size) {
+  gzipBuffer.write((const char*)ptr, size);
+  return size;
+}
+
+std::string ctb::CTBZOutputStream::str()
+{ 
+  std::flush(gzipBuffer); 
+  return outputBuffer.str();
+}
+
+size_t ctb::CTBZOutputStream::size()
+{
+  return outputBuffer.str().size(); 
 }

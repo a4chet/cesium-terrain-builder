@@ -142,6 +142,9 @@ public:
   std::vector<i_terrain_height> &
   getHeights();
 
+  void setIsValid(bool isValid = true);
+  bool isValidTile() const;
+
 protected:
   /// The terrain height data
   std::vector<i_terrain_height> mHeights; // replace with `std::array` in C++11
@@ -164,6 +167,7 @@ private:
   char mChildren;               ///< The child flags
   char mMask[MASK_CELL_SIZE];   ///< The water mask
   size_t mMaskLength;           ///< What size is the water mask?
+  bool isValid = true;
 
   /**
    * @brief Bit flags defining child tile existence

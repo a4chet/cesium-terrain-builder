@@ -22,7 +22,9 @@
  * @brief This declares and defines the `CTBZOutputStream` class
  */
 
+#include <sstream>
 #include "zlib.h"
+#include "zstr.hpp"
 #include "CTBOutputStream.hpp"
 
 namespace ctb {
@@ -33,7 +35,26 @@ namespace ctb {
 /// Implements CTBOutputStream for `GZFILE` object
 class CTB_DLL ctb::CTBZOutputStream : public ctb::CTBOutputStream {
 public:
-  CTBZOutputStream(gzFile gzptr): fp(gzptr) {}
+  CTBZOutputStream();
+
+  /// Writes a sequence of memory pointed by ptr into the stream
+  virtual uint32_t write(const void *ptr, uint32_t size);
+
+  virtual std::string str();
+  virtual size_t size();
+
+protected: 
+  std::stringbuf outputBuffer;
+  zstr::ostream gzipBuffer;
+};
+
+/// Implements CTBOutputStream for gzipped files
+class CTB_DLL ctb::CTBZFileOutputStream : public ctb::CTBOutputStream {
+public:
+  CTBZFileOutputStream(const char *fileName);
+ ~CTBZFileOutputStream();
+
+  void close();
 
   /// Writes a sequence of memory pointed by ptr into the stream
   virtual uint32_t write(const void *ptr, uint32_t size);
@@ -41,15 +62,6 @@ public:
 protected:
   /// The underlying GZFILE*
   gzFile fp;
-};
-
-/// Implements CTBOutputStream for gzipped files
-class CTB_DLL ctb::CTBZFileOutputStream : public ctb::CTBZOutputStream {
-public:
-  CTBZFileOutputStream(const char *fileName);
- ~CTBZFileOutputStream();
-
-  void close();
 };
 
 #endif /* CTBZOUTPUTSTREAM_HPP */

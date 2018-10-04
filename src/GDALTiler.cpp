@@ -33,6 +33,8 @@
 #include "CTBException.hpp"
 #include "GDALTiler.hpp"
 
+#include "gdaloverviewdataset.cpp"
+
 using namespace ctb;
 
 GDALTiler::GDALTiler(GDALDataset *poDataset, const Grid &grid, const TilerOptions &options):

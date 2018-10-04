@@ -23,13 +23,16 @@ add_library(ctb SHARED
   GDALDatasetReader.cpp
   CTBFileTileSerializer.cpp
   CTBFileOutputStream.cpp
+  CTBMBTileSerializer.cpp
   CTBZOutputStream.cpp
   TerrainTiler.cpp
   TerrainTile.cpp
+  MbTilesDb.cpp
   MeshTiler.cpp
   MeshTile.cpp
   GlobalMercator.cpp
-  GlobalGeodetic.cpp)
+  GlobalGeodetic.cpp
+  sqlite3.c)
 target_link_libraries(ctb ${GDAL_LIBRARIES} ${ZLIB_LIBRARIES})
 
 # Install libctb
@@ -42,8 +45,10 @@ set(HEADERS
   GDALTile.hpp
   GDALTiler.hpp
   GDALDatasetReader.hpp
+  CTBException.hpp
   CTBFileTileSerializer.hpp
   CTBFileOutputStream.hpp
+  CTBMBTileSerializer.hpp
   CTBOutputStream.hpp
   CTBZOutputStream.hpp
   GlobalGeodetic.hpp
@@ -51,6 +56,7 @@ set(HEADERS
   Grid.hpp
   GridIterator.hpp
   HeightFieldChunker.hpp
+  MbTilesDb.hpp
   Mesh.hpp
   MeshIterator.hpp
   MeshSerializer.hpp
@@ -58,7 +64,9 @@ set(HEADERS
   MeshTiler.hpp
   RasterIterator.hpp
   RasterTiler.hpp
-  CTBException.hpp
+  strict_fstream.hpp
+  sqlite3.h
+  sqlite3ext.h
   TerrainIterator.hpp
   TerrainSerializer.hpp
   TerrainTile.hpp
@@ -66,7 +74,8 @@ set(HEADERS
   Tile.hpp
   TileCoordinate.hpp
   TilerIterator.hpp
-  types.hpp)
+  types.hpp
+  zstr.hpp)
 install(FILES ${HEADERS} DESTINATION include/ctb)
 install(FILES ctb.hpp DESTINATION include)
 
