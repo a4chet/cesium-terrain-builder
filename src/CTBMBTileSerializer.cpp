@@ -23,7 +23,7 @@
 #include <string.h>
 #include <mutex>
 
-#include "MBTilesDb.hpp"
+#include "MbTilesDb.hpp"
 #include "../deps/concat.hpp"
 #include "cpl_vsi.h"
 #include "CTBException.hpp"

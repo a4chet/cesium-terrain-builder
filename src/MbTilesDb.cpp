@@ -29,7 +29,7 @@
 #include <stdexcept>
 #include <sstream>
 
-#include "MBTilesDb.hpp"
+#include "MbTilesDb.hpp"
 
 ctb::MbTilesDb::MbTilesDb(std::string const& dbname) {
 
